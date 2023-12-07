@@ -125,9 +125,39 @@ const changePassword = async (
     throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Something went wrong')
 }
 
+// bookmarked posts
+const bookmarkAPost = async (userId: string, postId: string) => {
+  const query = { _id: userId }
+
+  const findUser = await User.findById(userId)
+
+  if (!findUser) throw new ApiError(httpStatus.NOT_FOUND, 'User not found')
+
+  // Check if the user has already bookmarked the post
+  const isBookmarked = findUser.bookmarks.includes(postId)
+
+  console.log(isBookmarked)
+
+  // If the user has already bookmarked the post, remove it
+  if (isBookmarked) {
+    await User.updateOne(query, {
+      $pull: { bookmarks: postId },
+    })
+  } else {
+    // If the user has not bookmarked the post, add it
+    await User.updateOne(query, {
+      $addToSet: { bookmarks: postId },
+    })
+  }
+
+  // Return the updated post
+  return User.findById(query)
+}
+
 export const AuthService = {
   signUp,
   signIn,
   getAccessToken,
   changePassword,
+  bookmarkAPost,
 }

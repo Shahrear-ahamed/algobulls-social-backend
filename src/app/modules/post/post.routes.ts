@@ -38,6 +38,9 @@ router.get('/', auth, PostController.getAllPosts)
 // get my liked posts
 router.get('/my-liked-posts', auth, PostController.getMyLikedPosts)
 
+// get my bookmarked posts
+router.get('/my-bookmarked-posts', auth, PostController.getMyBookmarkedPosts)
+
 // get post
 router.get('/:id', auth, PostController.getPost)
 

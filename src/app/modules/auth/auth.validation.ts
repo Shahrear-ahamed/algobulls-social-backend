@@ -45,6 +45,7 @@ const changePasswordZodSchema = z.object({
   }),
 })
 
+
 export const AuthValidation = {
   signUpZodSchema,
   signInZodSchema,

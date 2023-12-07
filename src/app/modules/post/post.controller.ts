@@ -121,6 +121,20 @@ const getMyLikedPosts = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+// my bookmarked posts
+const getMyBookmarkedPosts = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.user?.id as string
+  const result = await PostService.getMyBookmarkedPosts(userId)
+
+  // send response
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Your bookmarked posts have been retrieved successfully',
+    data: result,
+  })
+})
+
 export const PostController = {
   createPost,
   updatePost,
@@ -130,4 +144,5 @@ export const PostController = {
   getAllPosts,
   likeAPost,
   getMyLikedPosts,
+  getMyBookmarkedPosts,
 }

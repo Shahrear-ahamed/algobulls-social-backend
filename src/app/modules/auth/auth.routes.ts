@@ -2,6 +2,7 @@ import express from 'express'
 import { AuthController } from './auth.controller'
 import validateRequest from '../../middlewares/validateRequest'
 import { AuthValidation } from './auth.validation'
+import auth from '../../middlewares/auth'
 
 // Define your routes here
 const router = express.Router()
@@ -35,5 +36,8 @@ router.post(
   validateRequest(AuthValidation.changePasswordZodSchema),
   AuthController.changePassword,
 )
+
+// bookmark post
+router.put('/bookmark/:id', auth, AuthController.bookmarkPost)
 
 export const AuthRoutes = router

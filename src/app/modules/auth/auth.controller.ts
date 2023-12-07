@@ -71,9 +71,25 @@ const changePassword = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+// bookmark post controller
+const bookmarkPost = catchAsync(async (req: Request, res: Response) => {
+  const postId = req.params.id
+  const profileId = req.user?.id as string
+  const result = await AuthService.bookmarkAPost(profileId, postId)
+
+  // send response
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Bookmark post successfully',
+    data: result,
+  })
+})
+
 export const AuthController = {
   signUp,
   signIn,
   getAccessToken,
   changePassword,
+  bookmarkPost,
 }

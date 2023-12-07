@@ -3,7 +3,7 @@ export type IUser = {
   email: string
   password: string
   avatar?: string
-  bookmarks?: string[]
+  bookmarks: string[]
 }
 
 export type IReturnToken = {
