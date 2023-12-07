@@ -22,6 +22,6 @@ const commentSchema = new Schema<IComment>(
   },
 )
 
-const Post = model('Post', commentSchema)
+const Comment = model('Comment', commentSchema)
 
-export default Post
+export default Comment
