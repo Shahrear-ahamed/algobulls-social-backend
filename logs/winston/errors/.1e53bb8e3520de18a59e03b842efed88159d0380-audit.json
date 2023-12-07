@@ -1,0 +1,30 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "E:\\Development\\Level_2_course\\Projects\\algobulls\\algobulls-social-backend\\logs\\winston\\errors\\.1e53bb8e3520de18a59e03b842efed88159d0380-audit.json",
+    "files": [
+        {
+            "date": 1701853269796,
+            "name": "E:\\Development\\Level_2_course\\Projects\\algobulls\\algobulls-social-backend\\logs\\winston\\errors\\phu-2023-06-12-15-error.log",
+            "hash": "fd32735712425481b16c188bc8bd846c9337f4c48c2918342d321a12227c545a"
+        },
+        {
+            "date": 1701866424638,
+            "name": "E:\\Development\\Level_2_course\\Projects\\algobulls\\algobulls-social-backend\\logs\\winston\\errors\\phu-2023-06-12-18-error.log",
+            "hash": "346dfed07069b9c9ec11e61860154e9bdc404b626a83970c5933505c511e2e94"
+        },
+        {
+            "date": 1701883386014,
+            "name": "E:\\Development\\Level_2_course\\Projects\\algobulls\\algobulls-social-backend\\logs\\winston\\errors\\phu-2023-06-12-23-error.log",
+            "hash": "15075f75d699b43bc4bf420926602b9a5eb6c47aa26063d027b08530ea06bbbf"
+        },
+        {
+            "date": 1701885746199,
+            "name": "E:\\Development\\Level_2_course\\Projects\\algobulls\\algobulls-social-backend\\logs\\winston\\errors\\phu-2023-07-12-00-error.log",
+            "hash": "76adc89dded210872717df73a6300e307f4445ad8bc420ad6d170190d820b977"
+        }
+    ],
+    "hashType": "sha256"
+}
