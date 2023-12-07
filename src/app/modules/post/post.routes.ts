@@ -23,13 +23,22 @@ router.put(
   PostController.updatePost,
 )
 
+// like a post
+router.post('/:id/like', auth, PostController.likeAPost)
+
 // delete post
 router.delete('/:id', auth, PostController.deletePost)
 
-// get post
-router.get('/:id', auth, PostController.getPost)
+// get my posts
+router.get('/my-posts', auth, PostController.getMyPosts)
 
 // get all posts
-router.get('/', auth, PostController.getMyPosts)
+router.get('/', auth, PostController.getAllPosts)
+
+// get my liked posts
+router.get('/my-liked-posts', auth, PostController.getMyLikedPosts)
+
+// get post
+router.get('/:id', auth, PostController.getPost)
 
 export const PostRoutes = router

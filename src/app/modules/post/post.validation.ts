@@ -6,7 +6,6 @@ import { z } from 'zod'
 const createPostValidation = z.object({
   body: z.object({
     body: z.string({ required_error: 'body must be required' }),
-    author: z.string({ required_error: 'author must be required' }),
   }),
 })
 

@@ -29,6 +29,21 @@
             "date": 1701908132887,
             "name": "E:\\Development\\Level_2_course\\Projects\\algobulls\\algobulls-social-backend\\logs\\winston\\errors\\phu-2023-07-12-06-error.log",
             "hash": "0bc69c9ce1a8d150618bd82d7f43e58496924c517ae625d161231fa30f8dd000"
+        },
+        {
+            "date": 1701951548085,
+            "name": "E:\\Development\\Level_2_course\\Projects\\algobulls\\algobulls-social-backend\\logs\\winston\\errors\\phu-2023-07-12-18-error.log",
+            "hash": "d0560da60ec523bc6d6c63a74c3a95baa9d4b89d33ce0a15f20fca9831cb2402"
+        },
+        {
+            "date": 1701954976696,
+            "name": "E:\\Development\\Level_2_course\\Projects\\algobulls\\algobulls-social-backend\\logs\\winston\\errors\\phu-2023-07-12-19-error.log",
+            "hash": "86cd47d4f371287df7ce2a5e9edcf1cb431222ff41a3e44c0448c6d23150e6a5"
+        },
+        {
+            "date": 1701958184996,
+            "name": "E:\\Development\\Level_2_course\\Projects\\algobulls\\algobulls-social-backend\\logs\\winston\\errors\\phu-2023-07-12-20-error.log",
+            "hash": "8bc6a72fd5b4dc7baf26e9e0b9146a14db02175959b01a73dff3697d225dc3b3"
         }
     ],
     "hashType": "sha256"

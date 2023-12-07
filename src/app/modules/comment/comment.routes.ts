@@ -24,9 +24,9 @@ router.put(
 )
 
 // delete comment route
-router.delete('/:id', CommentController.deleteComment)
+router.delete('/:id', auth, CommentController.deleteComment)
 
 // get comment by id route
-router.get('/:id', CommentController.getCommentById)
+router.get('/:id', auth, CommentController.getCommentById)
 
 export const CommentRoutes = router

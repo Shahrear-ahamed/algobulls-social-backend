@@ -6,6 +6,10 @@ import { IPost } from './post.interfaces'
 import Post from './post.model'
 
 const createPost = (payload: IPost): Promise<IPost> => {
+  // Add the author to the payload
+  // const
+
+  // payload.author = userId
   return Post.create(payload)
 }
 
@@ -44,10 +48,71 @@ const getMyPosts = async (userId: string): Promise<IPost[]> => {
   return Post.find({ author: userId })
 }
 
+const getAllPosts = async (userId: string): Promise<IPost[]> => {
+  const posts = await Post.find()
+    .populate('author', 'name email avatar')
+    .sort('-createdAt')
+
+  // Add the isLiked property to each post
+  const postsWithIsLiked = posts.map(post => {
+    const isLiked = post.likes.includes(userId)
+    return { ...post.toJSON(), isLiked }
+  })
+
+  return postsWithIsLiked
+}
+
+// like a post
+const likeAPost = async (postId: string, userId: string) => {
+  const query = { _id: postId }
+
+  const findPost = await Post.findById(query)
+
+  if (!findPost) throw new ApiError(httpStatus.NOT_FOUND, 'Post not found')
+
+  console.log(findPost.likes)
+
+  // Check if the user has already liked the post
+  const isLiked = findPost.likes.includes(userId)
+
+  // If the user has already liked the post, unlike it
+  if (isLiked) {
+    await Post.updateOne(query, {
+      $pull: { likes: userId },
+    })
+  } else {
+    // If the user has not liked the post, like it
+    await Post.updateOne(query, {
+      $addToSet: { likes: userId },
+    })
+  }
+
+  // Return the updated post
+  return Post.findById(query)
+}
+
+// my liked posts
+const getMyLikedPosts = async (userId: string): Promise<IPost[]> => {
+  const likedPosts = await Post.find({ likes: userId })
+    .populate('author', 'name email avatar')
+    .sort('-createdAt')
+
+  // Add the isLiked property to each post
+  const likedPostsWithIsLiked = likedPosts.map(post => {
+    const isLiked = post.likes.includes(userId)
+    return { ...post.toJSON(), isLiked }
+  })
+
+  return likedPostsWithIsLiked
+}
+
 export const PostService = {
   createPost,
   updatePost,
   deletePost,
   getPost,
   getMyPosts,
+  getAllPosts,
+  likeAPost,
+  getMyLikedPosts,
 }

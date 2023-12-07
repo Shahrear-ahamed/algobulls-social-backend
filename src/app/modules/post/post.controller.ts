@@ -6,8 +6,9 @@ import { Request, Response } from 'express'
 // Your controller code here
 
 const createPost = catchAsync(async (req: Request, res: Response) => {
-  const body = req.body
-  const result = await PostService.createPost(body)
+  const userId = req.user?.id as string
+  const payload = { ...req.body, author: userId }
+  const result = await PostService.createPost(payload)
 
   // send response
   sendResponse(res, {
@@ -75,10 +76,58 @@ const getMyPosts = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+// get all posts
+const getAllPosts = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.user?.id as string
+  const result = await PostService.getAllPosts(userId)
+
+  // send response
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Your posts have been retrieved successfully',
+    data: result,
+  })
+})
+
+// like a post
+const likeAPost = catchAsync(async (req: Request, res: Response) => {
+  const postId = req.params.id
+  const userId = req.user?.id as string
+
+  console.log(postId, userId)
+
+  const post = await PostService.likeAPost(postId, userId)
+
+  return res.status(httpStatus.OK).json({
+    data: post,
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Post liked successfully',
+  })
+})
+
+// my liked posts
+const getMyLikedPosts = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.user?.id as string
+  const result = await PostService.getMyLikedPosts(userId)
+
+  // send response
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Your liked posts have been retrieved successfully',
+    data: result,
+  })
+})
+
 export const PostController = {
   createPost,
   updatePost,
   deletePost,
   getPost,
   getMyPosts,
+  getAllPosts,
+  likeAPost,
+  getMyLikedPosts,
 }
