@@ -5,7 +5,7 @@ import { z } from 'zod'
 const createCommentValidation = z.object({
   body: z.object({
     body: z.string({ required_error: 'body must be required' }),
-    userId: z.string({ required_error: 'userId must be required' }),
+    postId: z.string({ required_error: 'Post id must be required' }),
   }),
 })
 

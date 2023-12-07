@@ -135,6 +135,20 @@ const getMyBookmarkedPosts = catchAsync(async (req: Request, res: Response) => {
   })
 })
 
+// get all comments of a post
+const getAllComments = catchAsync(async (req: Request, res: Response) => {
+  const postId = req.params.id
+  const result = await PostService.getAllComments(postId)
+
+  // send response
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Comments retrieved successfully',
+    data: result,
+  })
+})
+
 export const PostController = {
   createPost,
   updatePost,
@@ -145,4 +159,5 @@ export const PostController = {
   likeAPost,
   getMyLikedPosts,
   getMyBookmarkedPosts,
+  getAllComments,
 }

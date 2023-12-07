@@ -7,7 +7,8 @@ import httpStatus from 'http-status'
 
 // create comment controller
 const createComment = catchAsync(async (req: Request, res: Response) => {
-  const result = await CommentService.createComment(req.body)
+  const userId = req.user?.id as string
+  const result = await CommentService.createComment({ ...req.body, userId })
 
   // send response
   sendResponse(res, {

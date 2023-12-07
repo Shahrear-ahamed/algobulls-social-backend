@@ -2,10 +2,41 @@
 
 import Comment from './comment.model'
 import { IComment } from './comment.interfaces'
+import Post from '../post/post.model'
+import mongoose from 'mongoose'
 
 // create comment
 const createComment = async (payload: IComment) => {
-  return Comment.create(payload)
+  const session = await mongoose.startSession()
+  session.startTransaction()
+
+  try {
+    const comment = await Comment.create(payload)
+
+    if (!comment) {
+      throw new Error('Comment not created')
+    }
+
+    // set comment id into post
+    const updatedPost = await Post.findByIdAndUpdate(
+      { _id: payload.postId },
+      { $push: { comments: comment._id } },
+      { new: true },
+    ).session(session)
+
+    if (!updatedPost) {
+      throw new Error('Post not found')
+    }
+
+    await session.commitTransaction()
+    session.endSession()
+
+    return updatedPost
+  } catch (error) {
+    await session.abortTransaction()
+    session.endSession()
+    throw error
+  }
 }
 
 // update comment

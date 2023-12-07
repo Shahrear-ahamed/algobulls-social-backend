@@ -1,5 +1,8 @@
+import { Types } from "mongoose"
+
 // Define your interfaces here
 export type IComment = {
-  userId: string
   body: string
+  userId: Types.ObjectId
+  postId: Types.ObjectId
 }

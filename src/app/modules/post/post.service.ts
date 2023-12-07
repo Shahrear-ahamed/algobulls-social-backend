@@ -5,6 +5,7 @@ import ApiError from '../../../errors/ApiError'
 import { IPost } from './post.interfaces'
 import Post from './post.model'
 import User from '../auth/auth.model'
+import Comment from '../comment/comment.model'
 
 const createPost = (payload: IPost): Promise<IPost> => {
   return Post.create(payload)
@@ -138,6 +139,16 @@ const getMyBookmarkedPosts = async (userId: string): Promise<IPost[]> => {
   return bookmarkedPostsWithIsLikedAndBookmarked
 }
 
+const getAllComments = async (postId: string) => {
+  const comments = await Comment.find({ postId })
+    .populate('userId')
+    .sort('-createdAt')
+
+  if (!comments) throw new ApiError(httpStatus.NOT_FOUND, 'Post not found')
+
+  return comments
+}
+
 export const PostService = {
   createPost,
   updatePost,
@@ -148,4 +159,5 @@ export const PostService = {
   likeAPost,
   getMyLikedPosts,
   getMyBookmarkedPosts,
+  getAllComments,
 }

@@ -44,4 +44,7 @@ router.get('/my-bookmarked-posts', auth, PostController.getMyBookmarkedPosts)
 // get post
 router.get('/:id', auth, PostController.getPost)
 
+// get all comments of a post
+router.get('/:id/comments', auth, PostController.getAllComments)
+
 export const PostRoutes = router
